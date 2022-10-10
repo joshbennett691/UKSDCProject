@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Company</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/static/assets/css/custom.css">
+</head>
+<body>
+<h1>{{ data["company_name"] }}</h1>
+{% if no in followers.keys() %}
+        <a href={{ url_for('following.unfollow') }} type="button" class="btn btn-danger">Unfollow</a>
+
+    {% else %}
+        <a href={{ url_for('following.follow') }} type="button" class="btn btn-success">Follow</a>
+
+{% endif %}
+<ul>
+    <p>Company Number: {{ data['company_number'] }}</p>
+        <p>Company Status: {{ data['company_status'] }}</p>
+        <p>Date of Creation: {{ data['date_of_creation'] }}</p>
+        <p>etag: {{ data['etag'] }}</p>
+        <p>Has charges: {{ data['has_charges'] }}</p>
+        <p>Has insolvency history: {{ data['has_insolvency_history'] }}</p>
+        <p>Jurisdiction: {{ data['jurisdiction'] }}</p>
+        <p>Last full members list date: {{ data['last_full_members_list_date'] }}</p>
+        <p>Previous company names:</p>
+        {% for c in data['previous_company_names'] %}
+        <p>* Effective from: {{ c['effective_from'] }} </p>
+            <p>* Name: {{ c['name'] }} </p>
+        <p>* Ceased on: {{ c['ceased_on'] }} </p>
+        {% endfor %}
+        <p>Registered office address: {{ data['registered_office_address']['address_line_1'] }} {{ data['registered_office_address']['address_line_2'] }} {{ data['registered_office_address']['region'] }} {{ data['registered_office_address']['locality'] }} {{ data['registered_office_address']['postal_code'] }}</p>
+    <h2>Accounts</h2>
+    <h3>Accounting Reference Date</h3>
+    <p>{{ data['accounts']['accounting_reference_date']['month'] }}/{{ data['accounts']['accounting_reference_date']['day'] }}</p>
+    <h3>Last Accounts</h3>
+    <p>Made up to: {{ data['accounts']['last_accounts']['made_up_to'] }}</p>
+    <p>Type: {{ data['accounts']['last_accounts']['type'] }}</p>
+    <p>Period end on: {{ data['accounts']['last_accounts']['period_end_on'] }}</p>
+
+</ul>
+</body>
+</html>

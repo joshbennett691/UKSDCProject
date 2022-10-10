@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Dashboard</title>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css">
+        <link rel="stylesheet" href="/static/static/assets/css/custom.css">
+</head>
+<body>
+<h1>Hello {{ user.username }}</h1>
+{#<a href={{ url_for('authentication.logout') type='button' class='btn btn-primary' }}>Logout</a>#}
+<a href={{ url_for('authentication.logout') }} type="button" class="btn btn-primary">Logout</a>
+<a href={{ url_for('search.index') }} type="button" class="btn btn-primary">Search</a>
+
+{#<a href={{ url_for('index') }}>Search</a>#}
+<h2>Companies Followed:</h2>
+<div class="card" style="width: 18rem">
+    <ul class="list-group list-group-flush">
+        {% for k, v in followers.items() %}
+            <li class="list-group-item text-center d-inline-block">
+                <a href="/company/{{ k }}">{{ v }}</a>
+            </li>
+{#    <h4><a href="/company/{{ k }}">{{ v }}</a></h4>#}
+{% endfor %}
+    </ul>
+</div>
+
+</body>
+</html>
